@@ -104,6 +104,7 @@ Bundne ting (soulbound) vises ikke.
 ## Beslutninger
 
 - 2026-11-20: Ikon og stil er "Møntseglet": en guldmønt med en åben bog præget i midten. Rund, så den passer i minimap-knappen. Kildefiler og PNG i `grafik/`, spillets version i `Guldbog/Media/Guldbog.tga` (64×64).
+- 2026-11-20: Repoet er offentligt, så CurseForge kan linke til kildekoden. Automatisk pakning på CurseForge er slået fra; zip uploades manuelt, indtil en `.pkgmeta` er på plads.
 - 2026-11-20: Zip-filen bygges med `tools/package.py`, som tager alt i `Guldbog/` med, så nye filer som ikonet ikke bliver glemt. Første CurseForge-udgivelse markeres som Beta.
 - 2026-11-20: Git og privat GitHub-repo til versionsstyring. MIT-licens. Zip-filer i `dist/` er ikke i Git; de hører til udgivelserne.
 - 2026-11-19: Guldbog gemmer navnet på funktioner, spillet blokerer (`GuldbogDB.blocked` i SavedVariables), efter en "blocked from an action"-boks, der ikke kunne genskabes.
@@ -153,8 +154,9 @@ Trin, hvis Guldbog skal deles. Kun trin 1 er lavet.
 - [ ] Skærmbilleder og beskrivelse på engelsk.
 - [ ] Tjek at navnet er ledigt på CurseForge.
 - [x] Licens: MIT (`LICENSE`).
-- [ ] Opret CurseForge-projekt, upload zip med Forever som spilversion, vent på godkendelse (kl. 8–15 dansk tid). Tekster og tjekliste i `curseforge/description.md`.
-- [x] Kode i Git, privat repo på GitHub (Andershauch/Guldbog).
+- [x] CurseForge-projekt oprettet og koblet til GitHub-repoet (uden automatisk pakning).
+- [ ] Upload 0.17.0 og vent på godkendelse (kl. 8–15 dansk tid). Tekster og tjekliste i `curseforge/description.md`.
+- [x] Kode i Git, offentligt repo på GitHub (Andershauch/Guldbog).
 - [ ] Senere: automatisk pakning og upload til CurseForge ved ny version.
 
 Husk: Blizzards regler kræver, at addons er gratis, har synlig kode, ikke reklamerer og ikke beder om donationer i spillet.

@@ -10,5 +10,5 @@ Kilde til sandhed: README.md (status, beslutninger, idébank).
   Testen bruger en simuleret klient og erstatter ikke en test i spillet.
 - Små skridt. Nye idéer i README'ens idébank, ikke i koden.
 
-- Projektet er i Git (privat repo Andershauch/Guldbog). Commit-beskeder på engelsk. `dist/` er ikke i Git.
+- Projektet er i Git (offentligt repo Andershauch/Guldbog, koblet til CurseForge). Commit-beskeder på engelsk. `dist/` er ikke i Git.
 - Ny version: se "Ny version" i README. Zip bygges med `python3 tools/package.py`.
