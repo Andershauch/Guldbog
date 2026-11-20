@@ -1,0 +1,49 @@
+# Builds and publishes a release when a version tag (v1.2.3) is pushed:
+# test -> zip -> GitHub release -> CurseForge (Forever, beta).
+name: Release
+
+on:
+  push:
+    tags: ["v*"]
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    env:
+      CF_RELEASE_TYPE: beta
+      CF_GAME_VERSION: "1.60.1"
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check tag matches Guldbog.toc
+        id: version
+        run: echo "version=$(python3 tools/release.py check '${{ github.ref_name }}')" >> "$GITHUB_OUTPUT"
+
+      - name: Test
+        run: |
+          pip install lupa
+          python3 tests/test_guldbog.py Guldbog
+
+      - name: Build zip
+        run: python3 tools/package.py
+
+      - name: GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          python3 tools/release.py notes "${{ steps.version.outputs.version }}" > notes.md
+          gh release create "${{ github.ref_name }}" "dist/Guldbog-${{ steps.version.outputs.version }}.zip" \
+            --title "Guldbog ${{ steps.version.outputs.version }}" --notes-file notes.md
+
+      - name: Upload to CurseForge
+        env:
+          CF_API_KEY: ${{ secrets.CF_API_KEY }}
+          CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}
+        run: python3 tools/release.py upload "dist/Guldbog-${{ steps.version.outputs.version }}.zip" "${{ steps.version.outputs.version }}"

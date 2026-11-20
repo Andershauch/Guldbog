@@ -11,4 +11,4 @@ Kilde til sandhed: README.md (status, beslutninger, idébank).
 - Små skridt. Nye idéer i README'ens idébank, ikke i koden.
 
 - Projektet er i Git (offentligt repo Andershauch/Guldbog, koblet til CurseForge). Commit-beskeder på engelsk. `dist/` er ikke i Git.
-- Ny version: se "Ny version" i README. Zip bygges med `python3 tools/package.py`.
+- Ny version: se "Ny version" i README. Et tag `vX.Y.Z` udgiver automatisk til GitHub og CurseForge. Tag og `## Version` i toc skal passe, og CHANGELOG.md skal have et afsnit for versionen.
