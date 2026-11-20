@@ -3,7 +3,7 @@
 ## Notes: Inventory and selling suggestions across your characters
 ## Author: Anders
 ## IconTexture: Interface\AddOns\Guldbog\Media\Guldbog
-## Version: 0.16.1
+## Version: 0.17.0
 ## SavedVariables: GuldbogDB
 ## OptionalDeps: Auctionator, TradeSkillMaster
 

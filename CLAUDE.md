@@ -11,3 +11,4 @@ Kilde til sandhed: README.md (status, beslutninger, idébank).
 - Små skridt. Nye idéer i README'ens idébank, ikke i koden.
 
 - Projektet er i Git (privat repo Andershauch/Guldbog). Commit-beskeder på engelsk. `dist/` er ikke i Git.
+- Ny version: se "Ny version" i README. Zip bygges med `python3 tools/package.py`.

@@ -9,6 +9,9 @@ Addon til WoW Forever. Viser, hvad alle dine karakterer har i tasker og bank, hv
 - `dist/` – zip-filer til at dele (kun selve addon'et, ingen gemte data). Ikke i Git.
 - `grafik/` – ikon og billeder til CurseForge
 - `LICENSE` – MIT
+- `CHANGELOG.md` – ændringer pr. version (engelsk, bruges på CurseForge og GitHub)
+- `curseforge/` – tekster til CurseForge-siden
+- `tools/package.py` – bygger zip-filen i `dist/`
 - `CLAUDE.md` – noter til Claude
 
 ## Installation
@@ -89,7 +92,7 @@ Tryk **Venner** nederst. Du ser udstyr fra dine karakterer, som nogen på din ve
 
 Bundne ting (soulbound) vises ikke.
 
-## Status og kendte begrænsninger (v0.16.0)
+## Status og kendte begrænsninger (v0.17.0)
 
 - Testet i spillet på Kriger og Trylle: bank, fag-vinduer, Alt+klik, værktøj, klik-for-at-sælge, gevinst/depositum, crafting-listen, minimap-knap og post til egne karakterer. Egne auktioner er ikke bekræftet i spillet endnu. Præstens bank er ikke prøvet endnu.
 - Den faste materialeliste (`Data.lua`) bruger Classic-varenumre. Den bruges kun, indtil du har åbnet fag-vinduet.
@@ -101,6 +104,14 @@ Bundne ting (soulbound) vises ikke.
 ## Beslutninger
 
 - 2026-11-20: Ikon og stil er "Møntseglet": en guldmønt med en åben bog præget i midten. Rund, så den passer i minimap-knappen. Kildefiler og PNG i `grafik/`, spillets version i `Guldbog/Media/Guldbog.tga` (64×64).
+- 2026-11-20: Zip-filen bygges med `tools/package.py`, som tager alt i `Guldbog/` med, så nye filer som ikonet ikke bliver glemt. Første CurseForge-udgivelse markeres som Beta.
+- 2026-11-20: Git og privat GitHub-repo til versionsstyring. MIT-licens. Zip-filer i `dist/` er ikke i Git; de hører til udgivelserne.
+- 2026-11-19: Guldbog gemmer navnet på funktioner, spillet blokerer (`GuldbogDB.blocked` i SavedVariables), efter en "blocked from an action"-boks, der ikke kunne genskabes.
+- 2026-11-14: Listerne er delt i grupper, der kan foldes ud, fordi én lang liste var uoverskuelig. Lager efter forslag, Crafting efter karakter, Venner efter ven.
+- 2026-11-13: Klik-for-at-sælge tjekker Auctionators interne dele, før de bruges, og bruger ellers spillets egen sælg-fane. Så går en Auctionator-opdatering ikke i stykker for brugeren.
+- 2026-11-13: Faste antagelser er blevet til indstillinger med de gamle værdier som standard. Knapper man klikker igennem i stedet for tekstfelter (enklest, ingen tastefejl).
+- 2026-11-13: Engelsk er standard, dansk vælges med `/guldbog sprog da`. WoW findes ikke på dansk, så sproget er en indstilling. Eksisterende brugere beholder dansk. Al tekst ligger i `Locale.lua`.
+- 2026-11-10: Forever har efternavne og shards (EU4, EU5 ...) i stedet for servere. Post til venner bruger det fulde navn uden shard.
 - 2026-11-09: v0.1 er "lager og beslutning" frem for profit-liste, fordi karaktererne er lavt level.
 - 2026-11-09: Priser hentes fra Auctionator i stedet for egen AH-scanning. Mindre kode, og TSM er ikke ude til Forever endnu.
 - 2026-11-09: Addon'et køber og sælger aldrig selv. Det holder sig inden for Blizzards regler.
@@ -112,13 +123,6 @@ Bundne ting (soulbound) vises ikke.
 - 2026-11-09: Kolonnen "Her" og nedtoning viser, hvad den aktuelle karakter har.
 - 2026-11-09: Profit-listen bruger billigste af AH og vendor som materialepris, også for materialer du selv har samlet (det, du kunne have solgt dem for). Enchants uden vare er ikke med.
 - 2026-11-09: Egen minimap-knap uden ekstra biblioteker (simpelt først). LibDBIcon kan komme senere, hvis knappen skal samles med andre addons' knapper.
-- 2026-11-20: Git og privat GitHub-repo til versionsstyring. MIT-licens. Zip-filer i `dist/` er ikke i Git; de hører til udgivelserne.
-- 2026-11-19: Guldbog gemmer navnet på funktioner, spillet blokerer (`GuldbogDB.blocked` i SavedVariables), efter en "blocked from an action"-boks, der ikke kunne genskabes.
-- 2026-11-14: Listerne er delt i grupper, der kan foldes ud, fordi én lang liste var uoverskuelig. Lager efter forslag, Crafting efter karakter, Venner efter ven.
-- 2026-11-13: Klik-for-at-sælge tjekker Auctionators interne dele, før de bruges, og bruger ellers spillets egen sælg-fane. Så går en Auctionator-opdatering ikke i stykker for brugeren.
-- 2026-11-13: Faste antagelser er blevet til indstillinger med de gamle værdier som standard. Knapper man klikker igennem i stedet for tekstfelter (enklest, ingen tastefejl).
-- 2026-11-13: Engelsk er standard, dansk vælges med `/guldbog sprog da`. WoW findes ikke på dansk, så sproget er en indstilling. Eksisterende brugere beholder dansk. Al tekst ligger i `Locale.lua`.
-- 2026-11-10: Forever har efternavne og shards (EU4, EU5 ...) i stedet for servere. Post til venner bruger det fulde navn uden shard.
 - 2026-11-09: Venner-fanen viser kun, hvad vennen kan bære (klasse og level), fordi spillet ikke viser andres fag eller udstyr. Brevet gøres klar, men sendes aldrig automatisk.
 - 2026-11-09: Sekundære fag (Cooking, First Aid, Fishing) tæller med. Et fag registreres også, når dets vindue åbnes, fordi spillet ikke altid oplyser First Aid.
 - 2026-11-09: Priser fra Auctionator først, TSM (DBMinBuyout, ellers DBMarket; VendorBuy) som reserve. Mål: Guldbog skal kunne deles uden at alle har samme addons.
@@ -149,11 +153,19 @@ Trin, hvis Guldbog skal deles. Kun trin 1 er lavet.
 - [ ] Skærmbilleder og beskrivelse på engelsk.
 - [ ] Tjek at navnet er ledigt på CurseForge.
 - [x] Licens: MIT (`LICENSE`).
-- [ ] Opret CurseForge-projekt, upload zip med Forever som spilversion, vent på godkendelse (kl. 8–15 dansk tid).
+- [ ] Opret CurseForge-projekt, upload zip med Forever som spilversion, vent på godkendelse (kl. 8–15 dansk tid). Tekster og tjekliste i `curseforge/description.md`.
 - [x] Kode i Git, privat repo på GitHub (Andershauch/Guldbog).
 - [ ] Senere: automatisk pakning og upload til CurseForge ved ny version.
 
 Husk: Blizzards regler kræver, at addons er gratis, har synlig kode, ikke reklamerer og ikke beder om donationer i spillet.
+
+## Ny version
+
+1. Ret versionsnummeret i `Guldbog/Guldbog.toc` og skriv ændringerne i `CHANGELOG.md`.
+2. Kør testen: `python3 tests/test_guldbog.py Guldbog`.
+3. Byg zip: `python3 tools/package.py`.
+4. Commit, push og lav en udgivelse på GitHub med tag `vX.Y.Z` og zip-filen vedhæftet.
+5. Upload samme zip på CurseForge (Forever 1.60.1).
 
 ## Idébank
 
