@@ -1,10 +1,13 @@
-# Builds and publishes a release when a version tag (v1.2.3) is pushed:
-# test -> zip -> GitHub release -> CurseForge (Forever, beta).
+# Publishes a release when the version in Guldbog/Guldbog.toc changes on main
+# (or when run by hand): test -> zip -> GitHub release + tag -> CurseForge.
+# A version that already has a tag is skipped, so nothing is published twice.
 name: Release
 
 on:
   push:
-    tags: ["v*"]
+    branches: [main]
+    paths: ["Guldbog/Guldbog.toc"]
+  workflow_dispatch:
 
 permissions:
   contents: write
@@ -15,6 +18,7 @@ jobs:
     env:
       CF_RELEASE_TYPE: beta
       CF_GAME_VERSION: "1.60.1"
+      GH_TOKEN: ${{ github.token }}
     steps:
       - uses: actions/checkout@v4
 
@@ -22,27 +26,36 @@ jobs:
         with:
           python-version: "3.12"
 
-      - name: Check tag matches Guldbog.toc
+      - name: Read version
         id: version
-        run: echo "version=$(python3 tools/release.py check '${{ github.ref_name }}')" >> "$GITHUB_OUTPUT"
+        run: |
+          VERSION=$(python3 tools/release.py version)
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+          if gh release view "v$VERSION" > /dev/null 2>&1; then
+            echo "v$VERSION is already released – nothing to do."
+            echo "skip=true" >> "$GITHUB_OUTPUT"
+          fi
 
       - name: Test
+        if: steps.version.outputs.skip != 'true'
         run: |
           pip install lupa
           python3 tests/test_guldbog.py Guldbog
 
       - name: Build zip
+        if: steps.version.outputs.skip != 'true'
         run: python3 tools/package.py
 
       - name: GitHub release
-        env:
-          GH_TOKEN: ${{ github.token }}
+        if: steps.version.outputs.skip != 'true'
         run: |
-          python3 tools/release.py notes "${{ steps.version.outputs.version }}" > notes.md
-          gh release create "${{ github.ref_name }}" "dist/Guldbog-${{ steps.version.outputs.version }}.zip" \
-            --title "Guldbog ${{ steps.version.outputs.version }}" --notes-file notes.md
+          V="${{ steps.version.outputs.version }}"
+          python3 tools/release.py notes "$V" > notes.md
+          gh release create "v$V" "dist/Guldbog-$V.zip" --target "$GITHUB_SHA" \
+            --title "Guldbog $V" --notes-file notes.md
 
       - name: Upload to CurseForge
+        if: steps.version.outputs.skip != 'true'
         env:
           CF_API_KEY: ${{ secrets.CF_API_KEY }}
           CF_PROJECT_ID: ${{ vars.CF_PROJECT_ID }}

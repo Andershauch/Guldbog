@@ -1,5 +1,6 @@
 """Release helpers used by the GitHub workflow.
 
+  python3 tools/release.py version                # print ## Version (checks CHANGELOG has it)
   python3 tools/release.py check v0.17.1          # tag must match ## Version in Guldbog.toc
   python3 tools/release.py notes 0.17.1           # print that version's CHANGELOG section
   python3 tools/release.py upload dist/Guldbog-0.17.1.zip 0.17.1 [--dry-run]
@@ -80,10 +81,16 @@ def upload(zip_path, version, dry_run):
 
 
 def main():
-    if len(sys.argv) < 3:
+    if len(sys.argv) < 2:
         sys.exit(__doc__)
     cmd = sys.argv[1]
-    if cmd == "check":
+    if cmd == "version":
+        version = toc_version()
+        changelog_section(version)
+        print(version)
+    elif len(sys.argv) < 3:
+        sys.exit(__doc__)
+    elif cmd == "check":
         tag, version = sys.argv[2], toc_version()
         if tag != "v" + version:
             sys.exit(f"Tag {tag} does not match Guldbog.toc version {version}")

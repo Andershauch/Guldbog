@@ -14,7 +14,8 @@ CurseForge: https://www.curseforge.com/wow/addons/guldbog
 - `CHANGELOG.md` – ændringer pr. version (engelsk, bruges på CurseForge og GitHub)
 - `curseforge/` – tekster til CurseForge-siden
 - `tools/package.py` – bygger zip-filen i `dist/`
-- `tools/release.py` og `.github/workflows/release.yml` – automatisk udgivelse ved nyt tag
+- `tools/release.py` og `.github/workflows/release.yml` – automatisk udgivelse, når versionen ændres
+- `Hent seneste version.cmd` – dobbeltklik for at hente den nyeste kode fra GitHub
 - `CLAUDE.md` – noter til Claude
 
 ## Installation
@@ -107,6 +108,7 @@ Bundne ting (soulbound) vises ikke.
 ## Beslutninger
 
 - 2026-11-20: Ikon og stil er "Møntseglet": en guldmønt med en åben bog præget i midten. Rund, så den passer i minimap-knappen. Kildefiler og PNG i `grafik/`, spillets version i `Guldbog/Media/Guldbog.tga` (64×64).
+- 2026-11-20: Udgivelsen starter, når versionen i toc-filen ændres på `main`, ikke ved tags, så Claude kan stå for det hele (Claudes GitHub-forbindelse må ikke sende tags).
 - 2026-11-20: Automatisk udgivelse med eget GitHub-workflow og `tools/release.py` i stedet for BigWigs' packager, fordi addon'et ligger i en undermappe. Samme zip som ved manuel pakning. Uploader via CurseForges upload-API.
 - 2026-11-20: Repoet er offentligt, så CurseForge kan linke til kildekoden. Automatisk pakning på CurseForge er slået fra; zip uploades manuelt, indtil en `.pkgmeta` er på plads.
 - 2026-11-20: Zip-filen bygges med `tools/package.py`, som tager alt i `Guldbog/` med, så nye filer som ikonet ikke bliver glemt. Første CurseForge-udgivelse markeres som Beta.
@@ -160,7 +162,7 @@ Trin, hvis Guldbog skal deles. Kun trin 1 er lavet.
 - [x] Licens: MIT (`LICENSE`).
 - [x] CurseForge-projekt oprettet og koblet til GitHub-repoet (uden automatisk pakning).
 - [x] 0.17.0 uploadet og godkendt på CurseForge 2026-11-20 (Beta, Forever 1.60.1). Tekster i `curseforge/description.md`.
-- [x] Automatisk udgivelse ved nyt tag via GitHub Actions (kræver `CF_API_KEY` og `CF_PROJECT_ID` på GitHub).
+- [x] Automatisk udgivelse via GitHub Actions, når versionen ændres. `CF_API_KEY` og `CF_PROJECT_ID` er sat op.
 - [x] Kode i Git, offentligt repo på GitHub (Andershauch/Guldbog).
 - [ ] Senere: automatisk pakning og upload til CurseForge ved ny version.
 
@@ -168,20 +170,15 @@ Husk: Blizzards regler kræver, at addons er gratis, har synlig kode, ikke rekla
 
 ## Ny version
 
-1. Ret versionsnummeret i `Guldbog/Guldbog.toc` og skriv ændringerne under en ny overskrift i `CHANGELOG.md` (`## 0.17.1 – dato`).
-2. Commit og push.
-3. Send et tag med samme nummer:
-   ```
-   git tag v0.17.1
-   git push origin v0.17.1
-   ```
-4. GitHub gør resten (`.github/workflows/release.yml`): tjekker at tag og version passer, kører testen, bygger zip med `tools/package.py`, laver GitHub-udgivelsen og uploader til CurseForge som Beta til Forever 1.60.1. Følg med under *Actions* på GitHub.
+Claude står for alt på GitHub:
 
-Lav ikke selv udgivelsen på GitHub, når du bruger tags – det gør workflowet.
+1. Claude retter versionen i `Guldbog/Guldbog.toc`, skriver ændringerne i `CHANGELOG.md` og pusher til `main`.
+2. GitHub opdager den nye version (`.github/workflows/release.yml`): kører testen, bygger zip med `tools/package.py`, laver udgivelsen og tagget på GitHub og uploader til CurseForge som Beta til Forever 1.60.1.
+3. En version, der allerede er udgivet, springes over, så intet udgives to gange.
 
-Engangsopsætning på GitHub (*Settings → Secrets and variables → Actions*):
-- Secret `CF_API_KEY`: et API-token fra CurseForge.
-- Variable `CF_PROJECT_ID`: projektets ID fra CurseForge-siden ("About this project").
+Anders: dobbeltklik på **`Hent seneste version.cmd`** i projektmappen for at få den nyeste kode ned på computeren, og skriv `/reload` i spillet.
+
+Engangsopsætning på GitHub (gjort 2026-11-20): secret `CF_API_KEY` og variable `CF_PROJECT_ID` = 1818445.
 
 ## Idébank
 
