@@ -1,6 +1,8 @@
 # Guldbog
 
-_First audited 2026-11-20. **Not under version control** (no `.git`); `assessedAtCommit` is therefore empty and staleness cannot be measured by the scanner until `git init` is done._
+_First audited 2026-11-20 (then not under version control; since put under git - see the re-audit note below)._
+
+> **Re-audit 2026-11-20 at commit `5b2fbe8`** (8 commits after the first audit earlier the same day). The project is now under git, public on GitHub (`Andershauch/guldbog`, confirmed via the GitHub API) and released as 0.17.0 beta. Completion ~85% (estimate). Verified: addon code is unchanged since 0.16.1 apart from the new icon (`Guldbog.lua` lines 1592-1599, `Guldbog.toc` `IconTexture`); `tests/test_guldbog.py` exits 0. **Found:** the release workflow (`.github/workflows/release.yml`) has had 0 runs, and GitHub has only the `v0.16.1` release/tag - 0.17.0 was uploaded to CurseForge by hand (README line 164; not verified by me). The working tree has ~2,200 lines of CRLF-only noise in five files, a really changed `grafik/curseforge/banner.png`, and untracked screenshots/gallery. Not tested: anything in the game, the CurseForge page, the workflow's upload step. The sections below are the first audit and are superseded where they say "not under git" / "Critical: put under git"; see `assessments.json` for the current task list.
 
 ## Summary
 A World of Warcraft addon for **WoW Forever** (Interface 16001, version 0.16.1 per `Guldbog.toc`) that shows what all of Anders' Alliance characters hold in bags, bank and mail, what it is worth, and whether to use it, sell it on the Auction House or sell it to a vendor. Prices come from Auctionator (TSM as fallback). A Crafting tab lists recipes by profit; a Friends tab prepares a mail with gear a friend's class can wear. The addon never buys or sells by itself - every sale or mail needs the user's own click (rule in `CLAUDE.md`). English is the default language, Danish is a setting.

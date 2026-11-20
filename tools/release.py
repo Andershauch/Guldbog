@@ -6,7 +6,7 @@
   python3 tools/release.py upload dist/Guldbog-0.17.1.zip 0.17.1 [--dry-run]
 
 upload needs CF_API_KEY and CF_PROJECT_ID in the environment. CF_RELEASE_TYPE
-(alpha/beta/release, default beta) and CF_GAME_VERSION (default 1.60.1 = Forever)
+(alpha/beta/release, default release) and CF_GAME_VERSION (default 1.60.1 = Forever)
 are optional.
 """
 import json
@@ -58,7 +58,7 @@ def upload(zip_path, version, dry_run):
         "changelog": changelog_section(version),
         "changelogType": "markdown",
         "displayName": f"Guldbog {version}",
-        "releaseType": os.environ.get("CF_RELEASE_TYPE", "beta"),
+        "releaseType": os.environ.get("CF_RELEASE_TYPE", "release"),
     }
     game = os.environ.get("CF_GAME_VERSION", "1.60.1")
     if dry_run:

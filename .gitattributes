@@ -1,0 +1,6 @@
+# Same line endings everywhere, so Windows and Linux don't see false changes.
+* text=auto eol=lf
+*.cmd text eol=crlf
+*.png binary
+*.tga binary
+*.zip binary

@@ -58,6 +58,6 @@ Guldbog is new and tested on a few characters. Class/armour rules are based on C
 ## Første fil
 - Fil: `dist/Guldbog-0.17.0.zip` (byg med `python3 tools/package.py`)
 - Display name: `Guldbog 0.17.0`
-- Release type: **Beta**
+- Release type: **Release**
 - Spilversion: **Forever 1.60.1**
 - Changelog: kopiér afsnittet for 0.17.0 fra `CHANGELOG.md`
