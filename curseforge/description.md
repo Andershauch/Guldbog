@@ -1,5 +1,7 @@
 # CurseForge – tekster til projektsiden
 
+Projektside: https://www.curseforge.com/wow/addons/guldbog
+
 Kopiér felterne ind på CurseForge. Teksten er på engelsk, fordi det er det, de fleste brugere læser.
 
 ## Navn

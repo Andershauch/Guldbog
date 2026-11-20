@@ -2,6 +2,8 @@
 
 Addon til WoW Forever. Viser, hvad alle dine karakterer har i tasker og bank, hvad det er værd, og om du skal bruge det selv eller sælge det.
 
+CurseForge: https://www.curseforge.com/wow/addons/guldbog
+
 ## Projektstruktur
 
 - `Guldbog/` – selve addon'et (det er denne mappe, der kopieres til AddOns)
