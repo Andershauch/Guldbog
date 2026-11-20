@@ -99,7 +99,7 @@ Tryk **Venner** nederst. Du ser udstyr fra dine karakterer, som nogen på din ve
 
 Bundne ting (soulbound) vises ikke.
 
-## Status og kendte begrænsninger (v0.17.0)
+## Status og kendte begrænsninger (v0.17.1)
 
 - Testet i spillet på Kriger og Trylle: bank, fag-vinduer, Alt+klik, værktøj, klik-for-at-sælge, gevinst/depositum, crafting-listen, minimap-knap og post til egne karakterer. Egne auktioner er ikke bekræftet i spillet endnu. Præstens bank er ikke prøvet endnu.
 - Den faste materialeliste (`Data.lua`) bruger Classic-varenumre. Den bruges kun, indtil du har åbnet fag-vinduet.
@@ -170,7 +170,7 @@ Trin, hvis Guldbog skal deles. Kun trin 1 er lavet.
 - [x] 0.17.0 uploadet manuelt og godkendt på CurseForge 2026-11-20 (Release, Forever 1.60.1). Tekster i `curseforge/description.md`.
 - [x] Automatisk udgivelse via GitHub Actions, når versionen ændres. `CF_API_KEY` og `CF_PROJECT_ID` er lagt ind (kan ikke ses udefra).
 - [x] GitHub-delen af kæden er prøvet 2026-11-20: manuel kørsel lavede `v0.17.0` med zip.
-- [ ] CurseForge-uploaden fra kæden prøves ved næste version.
+- [x] Hele kæden prøvet 2026-11-20 med 0.17.1: GitHub-udgivelse og upload til CurseForge (venter på moderator).
 - [x] Kode i Git, offentligt repo på GitHub (Andershauch/Guldbog).
 - [ ] Senere: automatisk pakning og upload til CurseForge ved ny version.
 
