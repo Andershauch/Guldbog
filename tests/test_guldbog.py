@@ -636,3 +636,30 @@ print("open state:", dict(L.globals().GuldbogDB.open))
 L.execute("for _, f in ipairs(FRAMES) do if rawget(f, 'labelKey') == 'TAB_CRAFT' then f._OnClick(f) end end")
 for line in view(): print("craft:", line)
 L.execute("for _, f in ipairs(FRAMES) do if rawget(f, 'labelKey') == 'TAB_STOCK' then f._OnClick(f) end end")
+
+# --- Hide a character ---
+db = L.globals().GuldbogDB
+L.execute("""
+CURRENT = "Mage"; BAGS = { [0] = { {2589, 7} } }
+""")
+fire("BAG_UPDATE_DELAYED")
+def linen():
+    rows, _ = ns.BuildRows()
+    for i in range(1, len(rows) + 1):
+        if rows[i].id == 2589: return rows[i].count, rows[i].advice, sorted(dict(rows[i].holders).keys())
+print("all shown:", linen())
+L.execute('GuldbogDB.hidden["Mage-Realm"] = true')
+print("mage hidden:", linen())
+crafters = {ns.BuildCraftRows()[0][i].crafter for i in range(1, len(ns.BuildCraftRows()[0]) + 1)}
+print("crafters with mage hidden:", sorted(crafters))
+print("status mentions Mage:", "Mage" in ns.StatusLine())
+# Through the settings panel: open settings and click the Mage row's button.
+L.execute("for _, f in ipairs(FRAMES) do if rawget(f, 'charKey') == nil and rawget(f, '_text') == 'Back' then end end")
+sb = [f for f in L.eval("FRAMES").values() if f._text in ("Settings", "Indstillinger")]
+sb[0]._OnClick(sb[0])
+btn = [f for f in L.eval("FRAMES").values() if L.eval("function(f) return rawget(f, 'charKey') end")(f) == "Mage-Realm"]
+print("mage button label:", btn[0]._text)
+btn[0]._OnClick(btn[0])
+print("after click hidden:", L.eval('GuldbogDB.hidden["Mage-Realm"]'), "label:", btn[0]._text)
+print("all shown again:", linen())
+sb[0]._OnClick(sb[0])

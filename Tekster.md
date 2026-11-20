@@ -124,6 +124,9 @@ Udkast til gennemsyn. Engelsk bliver standard, dansk vælges med `/guldbog sprog
 | Vis minimap-knap | Show minimap button |
 | Ja / Nej | Yes / No |
 | Indstillingerne gælder for alle dine karakterer. Klik på en knap for at ændre den. | Settings apply to all your characters. Click a button to change it. |
+| Karakterer | Characters |
+| Skjulte karakterer tælles ikke med i lister og forslag. | Hidden characters are left out of every list and suggestion. |
+| Vises / Skjult | Shown / Hidden |
 
 ## Grupper
 

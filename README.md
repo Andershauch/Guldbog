@@ -51,6 +51,8 @@ Listerne er delt i grupper, som foldes ud og sammen med et klik på overskriften
 
 Knappen **Indstillinger** øverst i vinduet. Klik på en knap for at skifte værdi: sprog, minimum-depositum, auktionsvarighed, AH-gebyr (5 % faktion, 15 % neutral), om depositum regnes som tabt, og om minimap-knappen vises. Gælder for alle karakterer.
 
+Til højre under **Karakterer** kan hver karakter sættes til **Vises** eller **Skjult**. En skjult karakter tælles ikke med i Lager, Crafting, Venner, "Brug selv"/"Lær selv" eller statuslinjen. Dens data bliver liggende, så den kan vises igen.
+
 ## Kolonnerne
 
 - **Statuslinjen** nederst viser, hvornår Guldbog sidst så banken og postkassen på hver karakter, og hvor gamle AH-priserne er. Tip: Slå "Run autoscan when Auction House is opened" til i Auctionators indstillinger, så scannes priserne automatisk.
@@ -109,6 +111,7 @@ Bundne ting (soulbound) vises ikke.
 ## Beslutninger
 
 - 2026-11-20: Ikon og stil er "Møntseglet": en guldmønt med en åben bog præget i midten. Rund, så den passer i minimap-knappen. Kildefiler og PNG i `grafik/`, spillets version i `Guldbog/Media/Guldbog.tga` (64×64).
+- 2026-11-20: Karakterer kan skjules under Indstillinger. Data slettes ikke, så det kan fortrydes.
 - 2026-11-20: Udgivelser på CurseForge er **Release**, ikke Beta, fordi mange kun henter Release-versioner, og 0.17.0 allerede er Release. `.gitattributes` holder linjeskift ens på Windows og Linux.
 - 2026-11-20: Udgivelsen starter, når versionen i toc-filen ændres på `main`, ikke ved tags, så Claude kan stå for det hele (Claudes GitHub-forbindelse må ikke sende tags).
 - 2026-11-20: Automatisk udgivelse med eget GitHub-workflow og `tools/release.py` i stedet for BigWigs' packager, fordi addon'et ligger i en undermappe. Samme zip som ved manuel pakning. Uploader via CurseForges upload-API.

@@ -506,11 +506,25 @@ local function shortName(key)
   return (key:match("^([^-]+)")) or key
 end
 
+-- Characters the player hasn't hidden in Settings. Hidden ones keep their data
+-- but are left out of every list and suggestion.
+local function activeChars()
+  local hidden = GuldbogDB.hidden or {}
+  local key, c
+  return function()
+    repeat
+      key, c = next(GuldbogDB.chars, key)
+    until key == nil or not hidden[key]
+    return key, c
+  end
+end
+ns.ActiveChars = activeChars
+
 -- "Name (Profession)" for every character that still needs this material.
 -- Uses the scanned profession window when available, else the fixed list.
 local function whoUses(itemID)
   local out = {}
-  for key, c in pairs(GuldbogDB.chars) do
+  for key, c in activeChars() do
     for skill in pairs(c.profs or {}) do
       local t = c.trade and c.trade[skill]
       local uses
@@ -527,7 +541,7 @@ end
 -- Characters that have the recipe's profession and don't know it yet.
 local function whoCanLearn(skill, teaches)
   local out = {}
-  for key, c in pairs(GuldbogDB.chars) do
+  for key, c in activeChars() do
     if c.profs and c.profs[skill] then
       local t = c.trade and c.trade[skill]
       if not (t and teaches and t.known[teaches]) then
@@ -552,7 +566,7 @@ local function holdings()
       end
     end
   end
-  for key, c in pairs(GuldbogDB.chars) do
+  for key, c in activeChars() do
     local name = shortName(key)
     add(c.bags, name, totals)
     add(c.bank, name, totals)
@@ -581,7 +595,7 @@ end
 function ns.BuildCraftRows()
   local totals = holdings()
   local rows, profitable = {}, 0
-  for key, c in pairs(GuldbogDB.chars) do
+  for key, c in activeChars() do
     for skill, t in pairs(c.trade or {}) do
       if c.profs and c.profs[skill] then
         for _, rec in ipairs(t.recipes or {}) do
@@ -1004,7 +1018,7 @@ end
 -- e.g. "Bank: Name 2 t, Other aldrig   Post: ...   AH-priser: 3 t"
 local function statusLine()
   local names = {}
-  for key in pairs(GuldbogDB.chars) do names[#names + 1] = key end
+  for key in activeChars() do names[#names + 1] = key end
   table.sort(names)
   local function part(label, what)
     local bits = {}
@@ -1291,11 +1305,43 @@ local function createSettingsPanel()
     b:SetScript("OnClick", function() cycleSetting(row) end)
     local help = settingsPanel:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall")
     help:SetPoint("TOPLEFT", 0, y - 24)
-    help:SetWidth(740)
+    help:SetWidth(460)
     help:SetJustifyH("LEFT")
     settingsPanel.rows[i] = { label = label, button = b, help = help }
   end
+
+  -- Right column: show or hide each character. Rows are made on demand,
+  -- because new characters can appear while the game is running.
+  local head = settingsPanel:CreateFontString(nil, "OVERLAY", "GameFontNormal")
+  head:SetPoint("TOPLEFT", 500, -4)
+  head:SetWidth(260)
+  head:SetJustifyH("LEFT")
+  local help = settingsPanel:CreateFontString(nil, "OVERLAY", "GameFontDisableSmall")
+  help:SetPoint("TOPLEFT", 500, -24)
+  help:SetWidth(260)
+  help:SetJustifyH("LEFT")
+  settingsPanel.charHead, settingsPanel.charHelp, settingsPanel.charRows = head, help, {}
   settingsPanel:Hide()
+end
+
+local function charRow(i)
+  local rows = settingsPanel.charRows
+  if rows[i] then return rows[i] end
+  local y = -50 - (i - 1) * 28
+  local label = settingsPanel:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
+  label:SetPoint("TOPLEFT", 500, y - 4)
+  label:SetWidth(130)
+  label:SetJustifyH("LEFT")
+  label:SetWordWrap(false)
+  local b = CreateFrame("Button", nil, settingsPanel, "UIPanelButtonTemplate")
+  b:SetSize(110, 22)
+  b:SetPoint("TOPLEFT", 640, y)
+  b:SetScript("OnClick", function(self)
+    GuldbogDB.hidden[self.charKey] = not GuldbogDB.hidden[self.charKey] or nil
+    ns.Refresh()
+  end)
+  rows[i] = { label = label, button = b }
+  return rows[i]
 end
 
 local function refreshSettings()
@@ -1304,6 +1350,23 @@ local function refreshSettings()
     ui.label:SetText(ns.T(row.label))
     ui.button:SetText(row.show(settingValue(row)))
     ui.help:SetText(row.help and ns.T(row.help) or "")
+  end
+  settingsPanel.charHead:SetText(ns.T("SET_CHARACTERS"))
+  settingsPanel.charHelp:SetText(ns.T("SET_CHARACTERS_HELP"))
+  local keys = {}
+  for key in pairs(GuldbogDB.chars) do keys[#keys + 1] = key end
+  table.sort(keys)
+  for i, key in ipairs(keys) do
+    local ui = charRow(i)
+    local hidden = GuldbogDB.hidden[key]
+    ui.label:SetText(shortName(key))
+    ui.label:SetAlpha(hidden and 0.5 or 1)
+    ui.button.charKey = key
+    ui.button:SetText(ns.T(hidden and "CHAR_HIDDEN" or "CHAR_SHOWN"))
+    ui.label:Show(); ui.button:Show()
+  end
+  for i = #keys + 1, #settingsPanel.charRows do
+    settingsPanel.charRows[i].label:Hide(); settingsPanel.charRows[i].button:Hide()
   end
   totalText:SetText(ns.T("FOOT_SETTINGS"))
 end
@@ -1517,6 +1580,7 @@ events:SetScript("OnEvent", function(_, event, arg1, arg2)
       GuldbogDB.links = GuldbogDB.links or {}
       GuldbogDB.settings = GuldbogDB.settings or {}
       GuldbogDB.open = GuldbogDB.open or {}
+      GuldbogDB.hidden = GuldbogDB.hidden or {}
       GuldbogDB.sort = GuldbogDB.sort or {}
       GuldbogDB.sort.stock = GuldbogDB.sort.stock or {}
       GuldbogDB.sort.craft = GuldbogDB.sort.craft or {}

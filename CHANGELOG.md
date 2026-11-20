@@ -1,5 +1,8 @@
 # Changelog
 
+## Unreleased
+- Settings: hide a character, so its items and professions are left out of every list.
+
 ## 0.17.0 – 2026-11-20
 - Guldbog icon in the AddOns list and on the minimap button.
 - First release on CurseForge.
