@@ -1,6 +1,6 @@
 # Changelog
 
-## Unreleased
+## 0.17.1 – 2026-11-20
 - Settings: hide a character, so its items and professions are left out of every list.
 - The text at the bottom no longer runs under the buttons.
 - A character no longer shows up twice after moving to another shard; its bank and recipes are kept.
