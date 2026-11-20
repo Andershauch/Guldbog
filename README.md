@@ -155,7 +155,8 @@ Trin, hvis Guldbog skal deles. Kun trin 1 er lavet.
 - [ ] Tjek at navnet er ledigt på CurseForge.
 - [x] Licens: MIT (`LICENSE`).
 - [x] CurseForge-projekt oprettet og koblet til GitHub-repoet (uden automatisk pakning).
-- [ ] Upload 0.17.0 og vent på godkendelse (kl. 8–15 dansk tid). Tekster og tjekliste i `curseforge/description.md`.
+- [x] 0.17.0 uploadet og godkendt på CurseForge 2026-11-20 (Beta, Forever 1.60.1). Tekster i `curseforge/description.md`.
+- [ ] Automatisk pakning ved nyt tag (`.pkgmeta` + GitHub/CurseForge).
 - [x] Kode i Git, offentligt repo på GitHub (Andershauch/Guldbog).
 - [ ] Senere: automatisk pakning og upload til CurseForge ved ny version.
 
