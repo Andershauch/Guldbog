@@ -165,7 +165,8 @@ Trin, hvis Guldbog skal deles. Kun trin 1 er lavet.
 - [x] CurseForge-projekt oprettet og koblet til GitHub-repoet (uden automatisk pakning).
 - [x] 0.17.0 uploadet manuelt og godkendt på CurseForge 2026-11-20 (Release, Forever 1.60.1). Tekster i `curseforge/description.md`.
 - [x] Automatisk udgivelse via GitHub Actions, når versionen ændres. `CF_API_KEY` og `CF_PROJECT_ID` er lagt ind (kan ikke ses udefra).
-- [ ] Kæden er ikke kørt endnu: GitHub-delen prøves med en manuel kørsel (laver `v0.17.0` på GitHub), CurseForge-uploaden ved næste version.
+- [x] GitHub-delen af kæden er prøvet 2026-11-20: manuel kørsel lavede `v0.17.0` med zip.
+- [ ] CurseForge-uploaden fra kæden prøves ved næste version.
 - [x] Kode i Git, offentligt repo på GitHub (Andershauch/Guldbog).
 - [ ] Senere: automatisk pakning og upload til CurseForge ved ny version.
 
