@@ -30,7 +30,7 @@ ns.STRINGS = {
     FOOT_NO_SOURCE = "Neither Auctionator nor TSM is active – no AH prices.",
     FOOT_PROFITABLE = "Profitable recipes: %d of %d",
     FOOT_NO_RECIPES = "No recipes yet – open your profession windows once.",
-    FOOT_NO_FRIENDS = "No friends found. Battle.net friends only show while logged in on a character.",
+    FOOT_NO_FRIENDS = "No friends found. Battle.net friends show only while online.",
     FOOT_NO_MATCH = "None of your friends can use your gear right now.",
     FOOT_FRIENDS_HINT = "Click at a mailbox to prepare a mail.",
     STATUS_BANK = "Bank", STATUS_MAIL = "Mail", STATUS_PRICES = "AH prices", STATUS_NO_SOURCE = "no source",
@@ -59,7 +59,7 @@ ns.STRINGS = {
     SET_AH_CUT = "AH cut", CUT_FACTION = "5 % (faction AH)", CUT_NEUTRAL = "15 % (neutral AH)",
     SET_DEPOSIT_LOST = "Count deposit as lost", SET_DEPOSIT_LOST_HELP = "Careful: assumes the item doesn't sell, so the deposit isn't refunded.",
     SET_MINIMAP = "Show minimap button", YES = "Yes", NO = "No",
-    FOOT_SETTINGS = "Settings apply to all your characters. Click a button to change it.",
+    FOOT_SETTINGS = "Click a button to change it. Applies to all characters.",
   },
   da = {
     TAB_STOCK = "Lager", TAB_CRAFT = "Crafting", TAB_FRIENDS = "Venner", REFRESH = "Opdatér",
@@ -88,7 +88,7 @@ ns.STRINGS = {
     FOOT_NO_SOURCE = "Hverken Auctionator eller TSM er aktivt – ingen AH-priser.",
     FOOT_PROFITABLE = "Opskrifter med gevinst: %d af %d",
     FOOT_NO_RECIPES = "Ingen opskrifter endnu – åbn dine fag-vinduer én gang.",
-    FOOT_NO_FRIENDS = "Ingen venner fundet. Battle.net-venner vises kun, når de er logget ind på en karakter.",
+    FOOT_NO_FRIENDS = "Ingen venner fundet. Battle.net-venner vises kun online.",
     FOOT_NO_MATCH = "Ingen af dine venner kan bruge dit udstyr lige nu.",
     FOOT_FRIENDS_HINT = "Klik ved postkassen for at gøre klar til at sende.",
     STATUS_BANK = "Bank", STATUS_MAIL = "Post", STATUS_PRICES = "AH-priser", STATUS_NO_SOURCE = "ingen kilde",
@@ -117,7 +117,7 @@ ns.STRINGS = {
     SET_AH_CUT = "AH-gebyr", CUT_FACTION = "5 % (faktionens AH)", CUT_NEUTRAL = "15 % (neutralt AH)",
     SET_DEPOSIT_LOST = "Regn depositum som tabt", SET_DEPOSIT_LOST_HELP = "Forsigtigt: antager at varen ikke bliver solgt, så depositum ikke kommer tilbage.",
     SET_MINIMAP = "Vis minimap-knap", YES = "Ja", NO = "Nej",
-    FOOT_SETTINGS = "Indstillingerne gælder for alle dine karakterer. Klik på en knap for at ændre den.",
+    FOOT_SETTINGS = "Klik på en knap for at ændre. Gælder alle karakterer.",
   },
 }
 

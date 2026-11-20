@@ -78,7 +78,7 @@ Udkast til gennemsyn. Engelsk bliver standard, dansk vælges med `/guldbog sprog
 | Hverken Auctionator eller TSM er aktivt – ingen AH-priser. | Neither Auctionator nor TSM is active – no AH prices. |
 | Opskrifter med gevinst: %d af %d | Profitable recipes: %d of %d |
 | Ingen opskrifter endnu – åbn dine fag-vinduer én gang. | No recipes yet – open your profession windows once. |
-| Ingen venner fundet. Battle.net-venner vises kun, når de er logget ind på en karakter. | No friends found. Battle.net friends only show while logged in on a character. |
+| Ingen venner fundet. Battle.net-venner vises kun online. | No friends found. Battle.net friends show only while online. |
 | Ingen af dine venner kan bruge dit udstyr lige nu. | None of your friends can use your gear right now. |
 | Klik ved postkassen for at gøre klar til at sende. | Click at a mailbox to prepare a mail. |
 | Bank / Post / AH-priser | Bank / Mail / AH prices |
@@ -123,7 +123,7 @@ Udkast til gennemsyn. Engelsk bliver standard, dansk vælges med `/guldbog sprog
 | Forsigtigt: antager at varen ikke bliver solgt, så depositum ikke kommer tilbage. | Careful: assumes the item doesn't sell, so the deposit isn't refunded. |
 | Vis minimap-knap | Show minimap button |
 | Ja / Nej | Yes / No |
-| Indstillingerne gælder for alle dine karakterer. Klik på en knap for at ændre den. | Settings apply to all your characters. Click a button to change it. |
+| Klik på en knap for at ændre. Gælder alle karakterer. | Click a button to change it. Applies to all characters. |
 | Karakterer | Characters |
 | Skjulte karakterer tælles ikke med i lister og forslag. | Hidden characters are left out of every list and suggestion. |
 | Vises / Skjult | Shown / Hidden |

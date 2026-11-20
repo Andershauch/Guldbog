@@ -1495,6 +1495,10 @@ local function createFrame()
 
   totalText = frame:CreateFontString(nil, "OVERLAY", "GameFontNormal")
   totalText:SetPoint("BOTTOMLEFT", 16, 16)
+  -- Stop before the tab buttons; long text ends in "..." instead of running under them.
+  totalText:SetWidth(470)
+  totalText:SetJustifyH("LEFT")
+  totalText:SetWordWrap(false)
 
   local btn = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
   btn:SetSize(100, 22)

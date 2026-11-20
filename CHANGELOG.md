@@ -2,6 +2,7 @@
 
 ## Unreleased
 - Settings: hide a character, so its items and professions are left out of every list.
+- The text at the bottom no longer runs under the buttons.
 
 ## 0.17.0 – 2026-11-20
 - Guldbog icon in the AddOns list and on the minimap button.
