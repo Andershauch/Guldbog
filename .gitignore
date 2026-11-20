@@ -1,0 +1,12 @@
+# Built zip files are attached to GitHub/CurseForge releases, not stored in git.
+dist/
+*.zip
+
+# Python test cache
+__pycache__/
+*.pyc
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini

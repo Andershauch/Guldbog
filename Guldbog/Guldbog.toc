@@ -1,0 +1,11 @@
+## Interface: 16001
+## Title: Guldbog
+## Notes: Inventory and selling suggestions across your characters
+## Author: Anders
+## Version: 0.16.1
+## SavedVariables: GuldbogDB
+## OptionalDeps: Auctionator, TradeSkillMaster
+
+Locale.lua
+Data.lua
+Guldbog.lua

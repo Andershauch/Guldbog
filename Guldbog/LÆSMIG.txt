@@ -1,0 +1,37 @@
+Guldbog – kort vejledning
+
+Guldbog samler, hvad dine karakterer har i tasker, bank og post, og foreslår for hver ting, om du skal bruge den selv, lære den, sælge den på AH, sælge den til en handler eller beholde den. Jeg har bygget den til mig selv og testet den på mine egne karakterer, så der er sikkert ting, der driller hos dig. Sig til, så retter jeg det.
+
+INSTALLATION
+- Pak zip-filen ud i World of Warcraft\_forever_\Interface\AddOns\ (på Mac: /Applications/World of Warcraft/_forever_/Interface/AddOns/). Mappen Guldbog skal ligge direkte der med Guldbog.toc indeni, ikke Guldbog\Guldbog\...
+- Du skal have Auctionator eller TradeSkillMaster. Ellers får du ingen AH-priser.
+- Står den som "out of date" i AddOns-listen, så sæt flueben i "Load out of date AddOns".
+
+FØRSTE GANG
+- Guldbog starter på engelsk. Skriv /guldbog sprog da for dansk.
+- Log ind på hver karakter, og åbn banken og hvert fag-vindue én gang (også Cooking og First Aid).
+- Lav en fuld scanning i Auctionator ved auktionshuset. Tip: Slå "Run autoscan when Auction House is opened" til i Auctionators indstillinger.
+- Åbn Guldbog med mønt-knappen ved minimappet eller /guldbog.
+
+DE TRE FANER (nederst i vinduet)
+Listerne er delt i grupper. Klik på en overskrift for at folde den ud eller sammen. Guldbog husker, hvad du har foldet ud.
+
+- Lager: alt hvad du har, i grupperne Lær selv / Brug selv, Sælg på AH, Sælg til vendor, Behold / Værktøj, Behold / Dit valg, Til salg på AH og Ingen gevinst / Ingen pris. Beløbet ved overskriften er, hvad gruppen kan sælges for. "Gevinst" er, hvad du får mere på AH end hos en handler, efter AH-gebyr og depositum.
+- Crafting: dine opskrifter, én gruppe pr. karakter, med pris på materialer, salgspris, gevinst og skill-farve.
+- Venner: udstyr, som nogen på din venneliste kan bære, én gruppe pr. ven. Battle.net-venner vises kun, mens de er logget ind.
+
+KLIK
+- På en kolonneoverskrift: sortér (klik igen for at vende).
+- På en linje ved AH: "Sælg på AH"-varer åbnes i sælg-fanen.
+- På en linje ved en handler: "Sælg til vendor"-varer sælges. Fortryd under handlerens Buyback.
+- På en linje i Venner ved postkassen: brevet gøres klar.
+- Du trykker altid selv Post eller Send.
+- Alt+klik (Option+klik på Mac): behold varen (fx pile, mad, potions), så den ikke foreslås solgt. Alt+klik igen for at fortryde.
+
+INDSTILLINGER
+Knappen Indstillinger øverst i vinduet: sprog, minimum-depositum, auktionsvarighed, AH-gebyr (5 % faktion, 15 % neutral), om depositum regnes som tabt, og om minimap-knappen vises.
+
+STATUSLINJEN
+Nederst står, hvor gamle dataene er. Står der "aldrig", har Guldbog ikke set banken eller postkassen på den karakter endnu.
+
+Forslagene er et godt bud ud fra de priser, Guldbog kender. Tjek selv i Auctionator, før du sælger noget dyrt.
