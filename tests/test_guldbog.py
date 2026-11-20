@@ -663,3 +663,26 @@ btn[0]._OnClick(btn[0])
 print("after click hidden:", L.eval('GuldbogDB.hidden["Mage-Realm"]'), "label:", btn[0]._text)
 print("all shown again:", linen())
 sb[0]._OnClick(sb[0])
+
+# --- Same character on a new shard (realm name changes) ---
+L.execute("""
+GuldbogDB.chars["Trylle-EU4"] = { bags = { [2589] = 3 }, bank = { [818] = 2 }, profs = { [197] = 50 },
+  trade = { [197] = { known = {}, mats = {}, recipes = {} } }, seen = { bank = 100, mail = 200 } }
+GuldbogDB.hidden["Trylle-EU4"] = true
+GuldbogDB.chars["Bob-EU4"] = { bags = {}, bank = {}, profs = {}, guid = "Player-1-OTHER" }
+CURRENT = "Trylle"; GetRealmName = function() return "EU5" end
+UnitGUID = function() return "Player-1-TRYLLE" end
+BAGS = { [0] = { {2589, 9} } }
+""")
+fire("PLAYER_ENTERING_WORLD")
+db = L.globals().GuldbogDB
+keys = sorted(k for k in db.chars.keys() if k.startswith("Trylle") or k.startswith("Bob"))
+t = db.chars["Trylle-EU5"]
+print("shard merge keys:", keys)
+print("bags from new shard:", dict(t.bags), "bank kept:", dict(t.bank), "profs kept:", dict(t.profs))
+print("seen kept:", dict(t.seen), "guid:", t.guid, "hidden moved:", db.hidden["Trylle-EU5"], db.hidden["Trylle-EU4"])
+# Zone onto yet another shard mid-session.
+L.execute('GetRealmName = function() return "EU6" end')
+fire("BAG_UPDATE_DELAYED")
+print("after mid-session shard change:", sorted(k for k in db.chars.keys() if k.startswith("Trylle")))
+L.execute('GetRealmName = function() return "Realm" end; UnitGUID = function() return nil end; GuldbogDB.hidden = {}')

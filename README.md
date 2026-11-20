@@ -111,6 +111,7 @@ Bundne ting (soulbound) vises ikke.
 ## Beslutninger
 
 - 2026-11-20: Ikon og stil er "Møntseglet": en guldmønt med en åben bog præget i midten. Rund, så den passer i minimap-knappen. Kildefiler og PNG i `grafik/`, spillets version i `Guldbog/Media/Guldbog.tga` (64×64).
+- 2026-11-20: Forever flytter karakterer mellem shards, og servernavnet følger med. Guldbog genkender derfor en karakter på spillets faste id (GUID) og slår dubletter sammen, så bank og opskrifter bevares.
 - 2026-11-20: Karakterer kan skjules under Indstillinger. Data slettes ikke, så det kan fortrydes.
 - 2026-11-20: Udgivelser på CurseForge er **Release**, ikke Beta, fordi mange kun henter Release-versioner, og 0.17.0 allerede er Release. `.gitattributes` holder linjeskift ens på Windows og Linux.
 - 2026-11-20: Udgivelsen starter, når versionen i toc-filen ændres på `main`, ikke ved tags, så Claude kan stå for det hele (Claudes GitHub-forbindelse må ikke sende tags).

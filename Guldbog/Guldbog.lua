@@ -19,10 +19,50 @@ local function charKey()
   return UnitName("player") .. "-" .. GetRealmName()
 end
 
+-- Forever moves characters between shards, and the realm name follows the
+-- shard. So the same character can show up under several keys. Fold any
+-- older entry for this character into the current one: same GUID, or (for
+-- entries saved before we stored GUIDs) same name. Data we haven't seen yet
+-- under the new key (bank, mail, recipes ...) is kept from the old entry.
+local function mergeDuplicates(key, c)
+  local guid = UnitGUID and UnitGUID("player")
+  local name = UnitName("player")
+  for k, old in pairs(GuldbogDB.chars) do
+    if k ~= key and ((guid and old.guid == guid)
+        or (not old.guid and (k:match("^([^-]+)")) == name)) then
+      for field, value in pairs(old) do
+        local cur = c[field]
+        if cur == nil or (type(cur) == "table" and next(cur) == nil) then
+          c[field] = value
+        elseif field == "seen" and type(value) == "table" then
+          for what, t in pairs(value) do
+            if not cur[what] or t > cur[what] then cur[what] = t end
+          end
+        end
+      end
+      local hidden = GuldbogDB.hidden
+      if hidden and hidden[k] then hidden[key] = true; hidden[k] = nil end
+      GuldbogDB.chars[k] = nil
+    end
+  end
+  c.guid = guid or c.guid
+end
+
+-- The key can change while playing (zoning onto another shard), so merge
+-- whenever it differs from the last one we used.
+local lastKey
 local function getChar()
   local key = charKey()
-  GuldbogDB.chars[key] = GuldbogDB.chars[key] or { bags = {}, bank = {}, profs = {} }
-  return GuldbogDB.chars[key]
+  local c = GuldbogDB.chars[key]
+  if not c then
+    c = { bags = {}, bank = {}, profs = {} }
+    GuldbogDB.chars[key] = c
+  end
+  if key ~= lastKey then
+    lastKey = key
+    mergeDuplicates(key, c)
+  end
+  return c
 end
 
 local function getSlot(bag, slot)

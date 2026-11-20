@@ -3,6 +3,7 @@
 ## Unreleased
 - Settings: hide a character, so its items and professions are left out of every list.
 - The text at the bottom no longer runs under the buttons.
+- A character no longer shows up twice after moving to another shard; its bank and recipes are kept.
 
 ## 0.17.0 – 2026-11-20
 - Guldbog icon in the AddOns list and on the minimap button.
