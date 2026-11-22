@@ -30,7 +30,7 @@ FRAMES = {}
 NAMED = {}
 function CreateFrame(_, name) local f = obj(); FRAMES[#FRAMES+1] = f; if name then NAMED[name] = f end; return f end
 UIParent = obj(); GameTooltip = obj(); UISpecialFrames = {}
-Minimap = obj()
+Minimap = obj(); Minimap.GetWidth = function() return 140 end
 time = os.time
 HOOKS = {}
 function hooksecurefunc(name, fn) HOOKS[name] = fn end

@@ -1701,7 +1701,9 @@ local minimapButton
 
 local function placeMinimapButton()
   local a = math.rad(GuldbogDB.minimap.angle)
-  minimapButton:SetPoint("CENTER", Minimap, "CENTER", math.cos(a) * 80, math.sin(a) * 80)
+  -- Radius follows the actual minimap size (80 matches the default 140-wide minimap).
+  local r = (Minimap:GetWidth() or 140) / 2 + 10
+  minimapButton:SetPoint("CENTER", Minimap, "CENTER", math.cos(a) * r, math.sin(a) * r)
 end
 
 function ns.CreateMinimapButton()
