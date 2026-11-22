@@ -1,5 +1,8 @@
 # Changelog
 
+## 0.17.3 – 2026-11-22
+- The minimap button now sits on the edge of the minimap, also on larger minimaps.
+
 ## 0.17.2 – 2026-11-22
 - The window reopens where you left it, and can't be dragged off the screen.
 - The title shows which character you are playing.
