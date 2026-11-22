@@ -27,7 +27,8 @@ local function obj()
   return o
 end
 FRAMES = {}
-function CreateFrame(...) local f = obj(); FRAMES[#FRAMES+1] = f; return f end
+NAMED = {}
+function CreateFrame(_, name) local f = obj(); FRAMES[#FRAMES+1] = f; if name then NAMED[name] = f end; return f end
 UIParent = obj(); GameTooltip = obj(); UISpecialFrames = {}
 Minimap = obj()
 time = os.time
@@ -686,3 +687,37 @@ L.execute('GetRealmName = function() return "EU6" end')
 fire("BAG_UPDATE_DELAYED")
 print("after mid-session shard change:", sorted(k for k in db.chars.keys() if k.startswith("Trylle")))
 L.execute('GetRealmName = function() return "Realm" end; UnitGUID = function() return nil end; GuldbogDB.hidden = {}')
+
+# --- Window position is remembered ---
+L.execute("""
+local gf = NAMED.GuldbogFrame
+gf.StopMovingOrSizing = function() end
+gf.GetPoint = function() return "BOTTOMLEFT", nil, "BOTTOMLEFT", 300, 222 end
+gf._OnDragStop(gf)
+""")
+pos = L.eval("GuldbogDB.pos")
+print("saved position:", pos.point, pos.rel, pos.x, pos.y)
+assert (pos.point, pos.rel, pos.x, pos.y) == ("BOTTOMLEFT", "BOTTOMLEFT", 300, 222)
+
+# --- Sell advice names the character that holds the item ---
+L.execute("""
+CURRENT = "Mage"; GuldbogDB.hidden = {}; GuldbogDB.open = {}; GuldbogDB.lang = "en"
+BAGS = { [0] = { {2589, 5}, {2934, 4}, {5555, 1} } }
+for _, f in ipairs(FRAMES) do if rawget(f, 'labelKey') == 'TAB_STOCK' then f._OnClick(f) end end
+local gf = NAMED.GuldbogFrame
+gf:Show(); gf._OnShow(gf)
+""")
+tags = L.eval("""function()
+  local o = {}
+  for _, f in ipairs(FRAMES) do
+    local d = rawget(f, "data")
+    if d and not d.isHeader and (d.kind == 2 or d.kind == 3) and rawget(f, "_shown") ~= false then
+      o[#o + 1] = { here = d.here, text = rawget(f, "advice")._text }
+    end
+  end
+  return o
+end""")()
+seen = [(e.here, e.text) for e in tags.values()]
+print("sell advice texts:", seen)
+assert seen and all(("|cffff8040at " in text) == (here == 0) for here, text in seen)
+assert any(here == 0 for here, _ in seen)

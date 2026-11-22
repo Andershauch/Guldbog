@@ -13,7 +13,7 @@ ns.STRINGS = {
 
     ADV_USE = "Use: %s", ADV_LEARN = "Learn: %s", ADV_SELL_AH = "Sell on AH",
     ADV_SELL_VENDOR = "Sell to vendor", ADV_KEEP_TOOL = "Keep (tool)",
-    ADV_KEEP_CHOICE = "Keep (your choice)", ADV_ON_AH = "On the AH: %d",
+    ADV_AT = "at %s", ADV_KEEP_CHOICE = "Keep (your choice)", ADV_ON_AH = "On the AH: %d",
     ADV_NO_PROFIT = "No profit – keep or destroy", ADV_NO_PRICE = "No price – scan the AH",
 
     DIFF_OPTIMAL = "orange", DIFF_MEDIUM = "yellow", DIFF_EASY = "green", DIFF_TRIVIAL = "grey",
@@ -71,7 +71,7 @@ ns.STRINGS = {
 
     ADV_USE = "Brug selv: %s", ADV_LEARN = "Lær selv: %s", ADV_SELL_AH = "Sælg på AH",
     ADV_SELL_VENDOR = "Sælg til vendor", ADV_KEEP_TOOL = "Behold (værktøj)",
-    ADV_KEEP_CHOICE = "Behold (dit valg)", ADV_ON_AH = "Til salg på AH: %d",
+    ADV_AT = "hos %s", ADV_KEEP_CHOICE = "Behold (dit valg)", ADV_ON_AH = "Til salg på AH: %d",
     ADV_NO_PROFIT = "Ingen gevinst – behold eller smid ud", ADV_NO_PRICE = "Ingen pris – scan AH i Auctionator",
 
     DIFF_OPTIMAL = "orange", DIFF_MEDIUM = "gul", DIFF_EASY = "grøn", DIFF_TRIVIAL = "grå",

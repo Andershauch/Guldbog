@@ -1456,7 +1456,15 @@ local function refresh()
     else
       r.gain:SetText("|cffff6060-|r" .. money(-data.gain))
     end
-    r.advice:SetText(data.advice)
+    local advice = data.advice
+    if data.here == 0 and (data.kind == 2 or data.kind == 3) then
+      -- Sell advice for something another character holds: say who.
+      local who = {}
+      for name in pairs(data.holders) do who[#who + 1] = name end
+      table.sort(who)
+      advice = advice .. "  |cffff8040" .. ns.T("ADV_AT", table.concat(who, ", ")) .. "|r"
+    end
+    r.advice:SetText(advice)
     -- Dim items this character doesn't have.
     r:SetAlpha(data.here > 0 and 1 or 0.45)
   end)
@@ -1473,18 +1481,29 @@ ns.Refresh = refresh
 local function createFrame()
   frame = CreateFrame("Frame", "GuldbogFrame", UIParent, "BasicFrameTemplateWithInset")
   frame:SetSize(830, 480)
-  frame:SetPoint("CENTER")
+  -- Reopen where the window was left; centre only the very first time.
+  local pos = GuldbogDB.pos
+  if pos and pos.point then
+    frame:SetPoint(pos.point, UIParent, pos.rel or pos.point, pos.x or 0, pos.y or 0)
+  else
+    frame:SetPoint("CENTER")
+  end
+  frame:SetClampedToScreen(true)
   frame:SetMovable(true)
   frame:EnableMouse(true)
   frame:RegisterForDrag("LeftButton")
   frame:SetScript("OnDragStart", frame.StartMoving)
-  frame:SetScript("OnDragStop", frame.StopMovingOrSizing)
+  frame:SetScript("OnDragStop", function(self)
+    self:StopMovingOrSizing()
+    local point, _, rel, x, y = self:GetPoint()
+    if point then GuldbogDB.pos = { point = point, rel = rel, x = x, y = y } end
+  end)
   frame:SetScript("OnShow", refresh)
   tinsert(UISpecialFrames, "GuldbogFrame")
 
   local title = frame.TitleText or frame:CreateFontString(nil, "OVERLAY", "GameFontHighlight")
   if not frame.TitleText then title:SetPoint("TOP", 0, -5) end
-  title:SetText("Guldbog")
+  title:SetText("Guldbog  |cffffd700-|r  " .. UnitName("player"))
 
   settingsButton = CreateFrame("Button", nil, frame, "UIPanelButtonTemplate")
   settingsButton:SetSize(110, 18)
