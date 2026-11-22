@@ -1,5 +1,10 @@
 # Changelog
 
+## 0.17.2 – 2026-11-22
+- The window reopens where you left it, and can't be dragged off the screen.
+- The title shows which character you are playing.
+- Sell advice for an item held by another character now says who has it.
+
 ## 0.17.1 – 2026-11-20
 - Settings: hide a character, so its items and professions are left out of every list.
 - The text at the bottom no longer runs under the buttons.
